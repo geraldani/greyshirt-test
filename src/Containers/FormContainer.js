@@ -26,6 +26,7 @@ class FormContainer extends Component {
                 charactersEsp: 0,
                 charactersDesc: 0,
             },
+            checked:false,
         }
     }
 
@@ -43,6 +44,12 @@ class FormContainer extends Component {
         })
     }
 
+    handleCheck = e => {
+        this.setState({
+            checked:!this.state.checked
+        })
+    }
+
 
     render() {
         return (<div>
@@ -52,6 +59,8 @@ class FormContainer extends Component {
                     onChangeForm={this.handleChange}
                     data={this.state.formData}
                     charaters={this.state.length}
+                    checked={this.state.checked}
+                    onCheck={this.handleCheck}
                 />
                 <h2>
                     {this.state.formData.description}

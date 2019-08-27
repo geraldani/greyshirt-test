@@ -2,11 +2,12 @@ import React from 'react'
 import Textarea from "./utilidades/Textarea";
 import Input from "./utilidades/Input";
 import Title from "./utilidades/Title";
+import FieldComponent from "./utilidades/FieldComponent";
 
 const Form = (props) => {
     const {
         name, description, number, speciality, direction,
-        fromHour, toHour, nameAdm, surnameAdm, numberAdm, emailAdm,
+        fromHour, toHour,
         nameCom, surnameCom, numberCom, emailCom
     } = props.data;
     const {charactersEsp, charactersDesc} = props.charaters;
@@ -22,7 +23,7 @@ const Form = (props) => {
                             </div>
                         </div>
                         <div className="form-row">
-                            <div className="form-group col-md-6">
+                            <div className="form-group col-md-6 mb-0">
                                 <Input
                                     type='text' name='name'
                                     req={true} value={name}
@@ -30,7 +31,7 @@ const Form = (props) => {
                                     length={50} nombre="Nombre"
                                 />
                             </div>
-                            <div className="form-group col-md-6">
+                            <div className="form-group col-md-6 mb-0">
                                 <Input
                                     type='number' name='number'
                                     req={true}
@@ -61,7 +62,7 @@ const Form = (props) => {
                         </div>
 
                         <div className="form-row">
-                            <div className="form-group col-md-6">
+                            <div className="form-group col-md-6 mb-0">
                                 <Input
                                     type='text' name='direction'
                                     req={true} value={direction}
@@ -69,7 +70,7 @@ const Form = (props) => {
                                     length={200} nombre="Dirección"
                                 />
                             </div>
-                            <div className="form-group col-md-6">
+                            <div className="form-group col-md-6 mb-0">
                                 <label htmlFor="fromHour" style={{display: 'block'}}>Horario de atencion<span
                                     className="text-danger">*</span></label>
                                 <div className="col-md-6 pl-0" style={{display: 'inline-block'}}>
@@ -82,7 +83,7 @@ const Form = (props) => {
                                         name='fromHour'
                                         value={fromHour}/>
                                 </div>
-                                <span style={{position: 'absolute', bottom: '7px', left: '49%'}}>a</span>
+                                <span style={{position: 'absolute', bottom: '30px', left: '49%'}}>a</span>
                                 <div className="col-md-6 pr-0" style={{display: 'inline-block'}}>
                                     <input
                                         type="time"
@@ -96,61 +97,28 @@ const Form = (props) => {
                             </div>
                         </div>
                         <div className="form-row">
-                            <div className="form-group col-md-6">
+                            <FieldComponent name='Adm'
+                                            onChange={props.onChangeForm}
+                                            values={props.data}
+                                            style={{marginTop: 'calc(25px + 1.5rem)'}}
+                                            show={true}>
                                 <Title name="Contacto Administrativo"/>
-                                <Input
-                                    type='text' name='nameAdm'
-                                    req={true} value={nameAdm}
-                                    onChange={props.onChangeForm}
-                                    length={200} nombre="Nombre"
-                                />
-                                <Input
-                                    type='text' name='surnameAdm'
-                                    req={true} value={surnameAdm}
-                                    onChange={props.onChangeForm}
-                                    length={200} nombre="Apellido"
-                                />
-                                <Input
-                                    type='number' name='numberAdm'
-                                    req={true} value={numberAdm}
-                                    onChange={props.onChangeForm}
-                                    length={100} nombre="Teléfono"
-                                />
-                                <Input
-                                    type='email' name='emailAdm'
-                                    req={true} value={emailAdm}
-                                    onChange={props.onChangeForm}
-                                    length={100} nombre="E-mail"
-                                />
-                            </div>
+                            </FieldComponent>
 
-                            <div className="form-group col-md-6">
+                            <FieldComponent name='Com'
+                                            onChange={props.onChangeForm}
+                                            values={props.data}
+                                            show={props.checked}>
                                 <Title name="Contacto Comercial"/>
-                                <Input
-                                    type='text' name='nameCom'
-                                    req={true} value={nameCom}
-                                    onChange={props.onChangeForm}
-                                    length={200} nombre="Nombre"
-                                />
-                                <Input
-                                    type='text' name='surnameCom'
-                                    req={true} value={surnameCom}
-                                    onChange={props.onChangeForm}
-                                    length={200} nombre="Apellido"
-                                />
-                                <Input
-                                    type='number' name='numberCom'
-                                    req={true} value={numberCom}
-                                    onChange={props.onChangeForm}
-                                    length={100} nombre="Teléfono"
-                                />
-                                <Input
-                                    type='email' name='emailCom'
-                                    req={true} value={emailCom}
-                                    onChange={props.onChangeForm}
-                                    length={100} nombre="E-mail"
-                                />
-                            </div>
+                                <div className="custom-control custom-checkbox mb-4">
+                                    <input type="checkbox"
+                                           className="custom-control-input"
+                                           id="checkId"
+                                           checked={props.checked}
+                                           onChange={props.onCheck} />
+                                    <label className="custom-control-label" htmlFor="checkId">Idem contacto administrativo</label>
+                                </div>
+                            </FieldComponent>
                         </div>
                         <button type="submit" className="btn btn-default">Send invitation</button>
                     </form>

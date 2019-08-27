@@ -1,0 +1,20 @@
+button:hover{
+    cursor: pointer;
+}
+
+.header{
+    height: 80px;
+    background-color: #560808;
+    display: flex;
+    align-items: center;
+}
+
+.header h1{
+    margin: 0!important;
+    color: #fff;
+}
+
+.logo-image{
+    height: calc(100% - 20px);
+    margin: 0 10px;
+}

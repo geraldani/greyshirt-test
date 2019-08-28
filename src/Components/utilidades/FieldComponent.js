@@ -11,20 +11,19 @@ const FieldComponent = (props) => {
 
     return (
         <div className="form-group col-md-6 mb-0">
-            {props.children}
+            { props.children }
             {
-                // props.show &&
                 fieldsForm.map((val, index) => {
                     return (
                         <Input
                             type={val.type}
                             name={`${val.name}${props.name}`}
-                            req={true}
+                            req={props.req}
                             value={props.values[`${val.name}${props.name}`]}
                             onChange={props.onChange}
                             length={val.length}
                             nombre={val.showName}
-                            style={props.style}
+                            style={index===0 ? props.style : {}}
                             key={index}
                         />
                     )

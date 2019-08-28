@@ -3,12 +3,11 @@ import Textarea from "./utilidades/Textarea";
 import Input from "./utilidades/Input";
 import Title from "./utilidades/Title";
 import FieldComponent from "./utilidades/FieldComponent";
+import Label from "./utilidades/Label";
 
 const Form = (props) => {
     const {
-        name, description, number, speciality, direction,
-        fromHour, toHour,
-        nameCom, surnameCom, numberCom, emailCom
+        name, description, number, speciality, direction, fromHour, toHour,
     } = props.data;
     const {charactersEsp, charactersDesc} = props.charaters;
 
@@ -71,28 +70,23 @@ const Form = (props) => {
                                 />
                             </div>
                             <div className="form-group col-md-6 mb-0">
-                                <label htmlFor="fromHour" style={{display: 'block'}}>Horario de atencion<span
-                                    className="text-danger">*</span></label>
-                                <div className="col-md-6 pl-0" style={{display: 'inline-block'}}>
-                                    <input
-                                        type="time"
-                                        id="fromHour"
-                                        className="form-control"
-                                        required
-                                        onChange={props.onChangeForm}
-                                        name='fromHour'
-                                        value={fromHour}/>
-                                </div>
+                                <Label name='fromHour' style={{display: 'block'}} nombre='Horario de atencion' req={true}/>
                                 <span style={{position: 'absolute', bottom: '30px', left: '49%'}}>a</span>
-                                <div className="col-md-6 pr-0" style={{display: 'inline-block'}}>
-                                    <input
-                                        type="time"
-                                        id="toHour"
-                                        className="form-control"
-                                        required
+                                <div className="col-md-6 pl-0" style={{display: 'inline-block'}}>
+                                    <Input
+                                        type='time' name='fromHour'
+                                        req={true}
                                         onChange={props.onChangeForm}
-                                        name='toHour'
-                                        value={toHour}/>
+                                        value={fromHour}
+                                        showLabel={false}/>
+                                </div>
+                                <div className="col-md-6 pr-0" style={{display: 'inline-block'}}>
+                                    <Input
+                                        type='time' name='toHour'
+                                        req={true}
+                                        onChange={props.onChangeForm}
+                                        value={toHour}
+                                        showLabel={false}/>
                                 </div>
                             </div>
                         </div>
@@ -115,12 +109,22 @@ const Form = (props) => {
                                            className="custom-control-input"
                                            id="checkId"
                                            checked={props.checked}
-                                           onChange={props.onCheck} />
-                                    <label className="custom-control-label" htmlFor="checkId">Idem contacto administrativo</label>
+                                           onChange={props.onCheck}/>
+                                    <label className="custom-control-label" htmlFor="checkId">Idem contacto
+                                        administrativo</label>
                                 </div>
                             </FieldComponent>
                         </div>
-                        <button type="submit" className="btn btn-default">Send invitation</button>
+                        <div className='d-flex justify-content-end'>
+                            <button type="buttom" onClick={() => {
+                                alert("estoy guardando")
+                            }} className="btn btn-secondary mr-2">Cancelar
+                            </button>
+                            <button type="buttom" onClick={() => {
+                                alert("estoy cancelando")
+                            }} className="btn btn-primary">Guardar
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -1,13 +1,13 @@
 import React, {Fragment} from 'react'
+import Label from "./Label";
 
 const Textarea = (props) => (
     <Fragment>
-        <label htmlFor={props.name + 'Id'}>{props.nombre}
-            {
-                props.req &&
-                (<span className="text-danger">*</span>)
-            }
-        </label>
+        <Label
+            name={props.name}
+            style={props.style}
+            nombre={props.nombre}
+            req={props.req} />
         <textarea
             id={props.name + 'Id'}
             className="form-control"

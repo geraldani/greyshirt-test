@@ -10,24 +10,25 @@ class FormContainer extends Component {
                 description: '',
                 number: 0,
                 speciality: '',
-                direction:'',
-                fromHour:0,
-                toHour:0,
-                nameAdm:'',
-                surnameAdm:'',
-                numberAdm:0,
-                emailAdm:'',
-                nameCom:'',
-                surnameCom:'',
-                numberCom:0,
-                emailCom:'',
+                direction: '',
+                fromHour: 0,
+                toHour: 0,
+                nameAdm: '',
+                surnameAdm: '',
+                numberAdm: 0,
+                emailAdm: '',
+                nameCom: '',
+                surnameCom: '',
+                numberCom: 0,
+                emailCom: '',
             },
-            length:{
+            length: {
                 charactersEsp: 0,
                 charactersDesc: 0,
             },
-            checked:false,
+            checked: false,
         }
+
     }
 
     handleChange = e => {
@@ -37,35 +38,28 @@ class FormContainer extends Component {
                 [e.target.name]: e.target.value,
                 // characters:e.target.name==='description' ? e.target.textLength : this.state.form.characters
             },
-            length:{
-                charactersDesc:e.target.name==='description' ? e.target.textLength : this.state.length.charactersDesc,
-                charactersEsp:e.target.name==='speciality' ? e.target.textLength : this.state.length.charactersEsp
+            length: {
+                charactersDesc: e.target.name === 'description' ? e.target.textLength : this.state.length.charactersDesc,
+                charactersEsp: e.target.name === 'speciality' ? e.target.textLength : this.state.length.charactersEsp
             }
         })
     }
 
     handleCheck = e => {
         this.setState({
-            checked:!this.state.checked
+            checked: !this.state.checked
         })
     }
 
-
     render() {
-        return (<div>
-
-
-                <Form
-                    onChangeForm={this.handleChange}
-                    data={this.state.formData}
-                    charaters={this.state.length}
-                    checked={this.state.checked}
-                    onCheck={this.handleCheck}
-                />
-                <h2>
-                    {this.state.formData.description}
-                </h2>
-            </div>
+        return (
+            <Form
+                onChangeForm={this.handleChange}
+                data={this.state.formData}
+                charaters={this.state.length}
+                checked={this.state.checked}
+                onCheck={this.handleCheck}
+            />
         )
     }
 }

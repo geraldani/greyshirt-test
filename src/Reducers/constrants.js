@@ -1,3 +1,5 @@
-export const SAVE_DATA = 'SAVE_DATA';
-export const DELETE = 'DELETE';
-export const MODIFY = 'MODIFY';
+export const TYPE_ACTIONS = {
+    SAVE_DATA:'SAVE_DATA',
+    DELETE_DATA: 'DELETE_DATA',
+    MODIFY_DATA:'MODIFY_DATA',
+};

@@ -5,7 +5,7 @@ const FieldComponent = (props) => {
     const fieldsForm = [
         {showName: 'Nombre', name: 'name', type: 'text', length: 200},
         {showName: 'Apellido', name: 'surname', type: 'text', length: 200},
-        {showName: 'Teléfono', name: 'number', type: 'number', length: 100},
+        {showName: 'Teléfono', name: 'number', type: 'text', length: 100},
         {showName: 'E-mail', name: 'email', type: 'email', length: 100}
     ]
 

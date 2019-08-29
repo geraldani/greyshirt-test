@@ -3,7 +3,6 @@ import Title from "./utilidades/Title";
 import Buttom from "./utilidades/Buttom";
 
 const List = (props) => {
-
     return (
         <div className='container'>
             <div className='row m-0'>
@@ -29,12 +28,14 @@ const List = (props) => {
                                     <td>{elem.direction}</td>
                                     <td>{elem.number}</td>
                                     <td>
-                                        <Buttom class='btn-danger' name='Eliminar' onclick={() => {
-                                        props.onDelete(elem.id)
-                                    }}/>
-                                        <Buttom class='btn-primary' name='Editar' onclick={() => {
-                                            props.onModify(elem.id)
-                                        }}/>
+                                        <Buttom class='btn-danger' name='Eliminar'
+                                                onclick={() => {
+                                                    props.onDelete(elem.id)
+                                                }}
+                                        />
+                                        <Buttom class='btn-primary' name='Editar'
+                                            // onclick={() => {props.onModify(elem.id)}}
+                                        />
                                     </td>
                                 </tr>
                             ))

@@ -1,20 +1,15 @@
 import React, {Component, Fragment} from 'react'
 import List from "../Components/List";
-import uuid from 'react-uuid';
 import Modal from "../Components/utilidades/Modal";
+import {connect} from "react-redux";
+import {romeveDelivery} from "../Reducers/actions";
 
 class ListContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            index:-1,
             showModal: false,
-            index: -1,
-            data: [
-                {id: uuid(), name: 'Geraldyn', direction: 'av. vidal 2828, belgrano', number: '+5491173646494'},
-                {id: uuid(), name: 'Bar BQ', direction: 'calle 4511 nro 28, Palermo', number: '+5465654'},
-                {id: uuid(), name: 'El galpon de jose', direction: 'calle 74 nro 874, La Pampa', number: '+9654751251'},
-                {id: uuid(), name: 'Fanaticos de Asado', direction: 'calle 87 nro 74, La Plata', number: '+8746521216'},
-            ],
             columns: {
                 pageSize: 500,
                 cols: 4,
@@ -26,6 +21,7 @@ class ListContainer extends Component {
                 ]
             }
         }
+        let indice=-1;
     }
 
     onclick = e => {
@@ -33,16 +29,15 @@ class ListContainer extends Component {
     };
 
     onDelete = () => {
-        this.state.data.splice(this.state.index, 1);
+        this.props.dispatch(romeveDelivery(this.indice))
         this.setState({
-            data: this.state.data,
-            showModal: false,
-        });
+            showModal:false
+        })
     };
 
     findIndex = id => {
         let index = -1;
-        this.state.data.forEach((val, i) => {
+        this.props.allData.forEach((val, i) => {
             if (val.id === id)
                 index = i;
         });
@@ -56,8 +51,9 @@ class ListContainer extends Component {
     showModal = id => {
         this.setState({
             showModal: true,
-            index: this.findIndex(id)
+            // index: this.findIndex(id)
         })
+        this.indice=this.findIndex(id)
     };
 
     onCancel = () => {
@@ -69,7 +65,7 @@ class ListContainer extends Component {
     render() {
         return (
             <Fragment>
-                <List data={this.state.data}
+                <List data={this.props.allData}
                       col={this.state.columns}
                       onDelete={this.showModal}
                       onModify={this.onModify}
@@ -77,14 +73,19 @@ class ListContainer extends Component {
                 {
                     this.state.showModal &&
                     <Modal
-                        data={this.state.data[this.state.index]}
+                        data={this.props.allData[this.indice]}
                         onAccept={this.onDelete}
-                        onCancel={this.onCancel}
-                    />
+                        onCancel={this.onCancel}/>
                 }
             </Fragment>
         )
     }
 }
 
-export default ListContainer;
+const mapStateToProps = (state) => {
+    return {
+        allData: state.data
+    }
+}
+
+export default connect(mapStateToProps)(ListContainer);

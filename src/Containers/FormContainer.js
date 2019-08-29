@@ -1,25 +1,29 @@
 import React, {Component} from 'react'
 import Form from "../Components/Form";
+import uuid from "react-uuid";
+import {connect} from 'react-redux';
+import {addDelivery} from "../Reducers/actions";
 
 class FormContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
             formData: {
+                id: '',
                 name: '',
                 description: '',
-                number: 0,
+                number: '',
                 speciality: '',
                 direction: '',
-                fromHour: 0,
-                toHour: 0,
+                fromHour: '',
+                toHour: '',
                 nameAdm: '',
                 surnameAdm: '',
-                numberAdm: 0,
+                numberAdm: '',
                 emailAdm: '',
                 nameCom: '',
                 surnameCom: '',
-                numberCom: 0,
+                numberCom: '',
                 emailCom: '',
             },
             length: {
@@ -28,9 +32,7 @@ class FormContainer extends Component {
             },
             checked: false,
         }
-
     }
-
     handleChange = e => {
         this.setState({
             formData: {
@@ -43,7 +45,6 @@ class FormContainer extends Component {
             }
         })
     };
-
     handleCheck = e => {
         this.setState({
             checked: !this.state.checked
@@ -52,11 +53,12 @@ class FormContainer extends Component {
     onCancel = e => {
         this.props.history.push('/')
     };
+    onAccept = e => {
+        e.preventDefault();
+        this.props.dispatch(addDelivery(this.state.formData, uuid()))
+        this.props.history.push('/')
 
-    onAccept= e =>{
-        alert('Le di a aceptar');
     };
-
     render() {
         return (
             <Form
@@ -71,5 +73,9 @@ class FormContainer extends Component {
         )
     }
 }
-
-export default FormContainer;
+const mapStateToProps = (state) => {
+    return {
+        dataForm: state.formData
+    }
+}
+export default connect(mapStateToProps)(FormContainer);

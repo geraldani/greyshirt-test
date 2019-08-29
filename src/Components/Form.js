@@ -12,7 +12,7 @@ const Form = (props) => {
         input1:
             [
                 {showName: 'Nombre', name: 'name', type: 'text', length: 50, required: true},
-                {showName: 'Teléfono', name: 'number', type: 'number', length: 50, required: true},
+                {showName: 'Teléfono', name: 'number', type: 'text', length: 50, required: true},
             ],
         input2:
             [
@@ -130,7 +130,7 @@ const Form = (props) => {
 
                         <div className='d-flex justify-content-end'>
                             <Buttom onclick={props.oncancel} class='btn-secondary mr-2' name='Cancelar'/>
-                            <Buttom onclick={props.onacept} class='btn-primary' name='Guardar'/>
+                            <Buttom type='submit' onclick={props.onacept} class='btn-primary' name='Guardar'/>
                         </div>
                     </form>
                 </div>

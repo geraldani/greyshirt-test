@@ -34,7 +34,9 @@ const List = (props) => {
                                                 }}
                                         />
                                         <Buttom class='btn-primary' name='Editar'
-                                            // onclick={() => {props.onModify(elem.id)}}
+                                                onclick={() => {
+                                                    props.onModify(elem.id)
+                                                }}
                                         />
                                     </td>
                                 </tr>

@@ -2,13 +2,13 @@ import React, {Component, Fragment} from 'react'
 import List from "../Components/List";
 import Modal from "../Components/utilidades/Modal";
 import {connect} from "react-redux";
-import {romeveDelivery} from "../Reducers/actions";
+import {deleteDelivery} from "../Reducers/actions";
 
 class ListContainer extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            index:-1,
+            index: -1,
             showModal: false,
             columns: {
                 pageSize: 500,
@@ -21,20 +21,17 @@ class ListContainer extends Component {
                 ]
             }
         }
-        let indice=-1;
+        this.indice = -1;
     }
-
     onclick = e => {
         this.props.history.push({pathname: '/add'})
     };
-
     onDelete = () => {
-        this.props.dispatch(romeveDelivery(this.indice))
+        this.props.dispatch(deleteDelivery(this.indice))
         this.setState({
-            showModal:false
+            showModal: false
         })
     };
-
     findIndex = id => {
         let index = -1;
         this.props.allData.forEach((val, i) => {
@@ -43,25 +40,22 @@ class ListContainer extends Component {
         });
         return index;
     };
-
     onModify = id => {
-        let index = this.findIndex(id)
+        this.indice = this.findIndex(id);
+        this.props.history.push({pathname: '/add', state: {index: this.indice}})
+        // this.props.dispatch(updateDelivery(this.props.allData[this.indice]))
     };
-
     showModal = id => {
         this.setState({
             showModal: true,
-            // index: this.findIndex(id)
         })
-        this.indice=this.findIndex(id)
+        this.indice = this.findIndex(id)
     };
-
     onCancel = () => {
         this.setState({
             showModal: false,
         })
     };
-
     render() {
         return (
             <Fragment>
@@ -81,11 +75,9 @@ class ListContainer extends Component {
         )
     }
 }
-
 const mapStateToProps = (state) => {
     return {
         allData: state.data
     }
 }
-
 export default connect(mapStateToProps)(ListContainer);

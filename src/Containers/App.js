@@ -12,12 +12,14 @@ class App extends Component {
                 <Header/>
                 <Switch>
                     <Route exact path='/' component={ListContainer}/>
-                    <Route exact path='/add' component={FormContainer}/>
+                    <Route exact path='/add' render={(props) => (
+                        <FormContainer history={props.history}
+                                       modify={props.location.state}/>
+                    )}/>
                 </Switch>
                 <Footer/>
             </BrowserRouter>
         )
     }
 }
-
 export default App;

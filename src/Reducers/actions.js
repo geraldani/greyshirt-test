@@ -10,10 +10,20 @@ export function addDelivery(datos,uuid) {
     }
 }
 
-export function romeveDelivery(i) {
+export function deleteDelivery(i) {
     if (i>=0) {
         return {
             type:TYPE_ACTIONS.DELETE_DATA,
+            index:i
+        }
+    }
+}
+
+export function updateDelivery(obj,i) {
+    if (obj) {
+        return {
+            type:TYPE_ACTIONS.MODIFY_DATA,
+            data:obj,
             index:i
         }
     }

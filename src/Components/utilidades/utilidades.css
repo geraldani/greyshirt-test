@@ -24,3 +24,19 @@ button:hover{
     width: 100%;
     background-color: #560808;
 }
+
+.my-modal{
+
+    left: calc(50% - 250px);
+    width: 500px;
+    margin: 0;
+    top: calc(50% - 95px);
+}
+
+.modal-container{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    position: fixed;
+    top:0;
+}

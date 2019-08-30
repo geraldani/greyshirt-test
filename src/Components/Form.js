@@ -5,27 +5,28 @@ import Title from "./utilidades/Title";
 import FieldComponent from "./utilidades/FieldComponent";
 import Label from "./utilidades/Label";
 import Buttom from "./utilidades/Buttom";
+import ErrorBadge from "./utilidades/ErrorBadge";
 
 const Form = (props) => {
     const {direction} = props.data;
     const formField = {
         input1:
             [
-                {showName: 'Nombre', name: 'name', type: 'text', length: 50, required: true},
-                {showName: 'Teléfono', name: 'number', type: 'text', length: 50, required: true},
+                {showName: 'Nombre', name: 'name', type: 'text', length: 50, required: props.req['name']},
+                {showName: 'Teléfono', name: 'number', type: 'text', length: 50, required: props.req['number']},
             ],
         input2:
             [
-                {showName: 'Especialidad', name: 'speciality', length: 500, required: false, char: 'charactersEsp'},
-                {showName: 'Descripción', name: 'description', length: 1000, required: true, char: 'charactersDesc'},
+                {showName: 'Especialidad', name: 'speciality', length: 500, required: props.req['speciality'], char: 'charactersEsp'},
+                {showName: 'Descripción', name: 'description', length: 1000, required: props.req['description'], char: 'charactersDesc'},
             ],
         input3:
             [
-                {name: 'fromHour', type: 'time', required: true, clas: 'pl-0'},
-                {name: 'toHour', type: 'time', required: true, clas: 'pr-0'},
+                {name: 'fromHour', type: 'time', required: props.req['fromHour'], clas: 'pl-0'},
+                {name: 'toHour', type: 'time', required: props.req['toHour'], clas: 'pr-0'},
             ]
     }
-
+    const isError = elem => props.validation.inputError && props.validation.inputError[props.validation.inputError.indexOf(elem)] === elem;
     return (
         <div className='container'>
             <div className='row m-0'>
@@ -45,10 +46,14 @@ const Form = (props) => {
                                             req={val.required} value={props.data[val.name]}
                                             onChange={props.onChangeForm}
                                             length={val.length} nombre={val.showName}
+                                            clas={isError(val.name) ? 'is-invalid' : ''}
                                         />
+                                        {isError(val.name) &&
+                                        <ErrorBadge message={props.validation.errorMessage} position='68'/>}
                                     </div>
                                 ))
                             }
+
                         </div>
 
                         <div className="form-row">
@@ -60,7 +65,10 @@ const Form = (props) => {
                                             onChange={props.onChangeForm}
                                             value={props.data[val.name]} req={val.required}
                                             length={val.length} nombre={val.showName}
+                                            clas={isError(val.name) ? 'is-invalid' : ''}
                                             char={props.charaters[val.char]}/>
+                                        {isError(val.name) &&
+                                        <ErrorBadge message={props.validation.errorMessage} position='92'/>}
                                     </div>
                                 ))
                             }
@@ -70,10 +78,13 @@ const Form = (props) => {
                             <div className="form-group col-md-6 mb-0">
                                 <Input
                                     type='text' name='direction'
-                                    req={true} value={direction}
+                                    req={props.req['direction']} value={direction}
                                     onChange={props.onChangeForm}
                                     length={200} nombre="Dirección"
+                                    clas={isError('direction') ? 'is-invalid' : ''}
                                 />
+                                {isError("direction") && <ErrorBadge message={props.validation.errorMessage} position='68'/>}
+
                             </div>
 
                             <div className="form-group col-md-6 mb-0">
@@ -89,7 +100,9 @@ const Form = (props) => {
                                                 req={val.required}
                                                 onChange={props.onChangeForm}
                                                 value={props.data[val.name]}
+                                                clas={isError(val.name) ? 'is-invalid' : ''}
                                                 showLabel={false}/>
+                                            {isError(val.name) && <ErrorBadge message={props.validation.errorMessage} position='36'/>}
                                         </div>
                                     ))
                                 }
@@ -98,18 +111,22 @@ const Form = (props) => {
                         <div className="form-row">
                             {/* CONTACTO ADMINISTRATIVO*/}
                             <FieldComponent name='Adm'
+                                            inputError={props.validation.inputError}
+                                            errorMessage={props.validation.errorMessage}
                                             onChange={props.onChangeForm}
                                             values={props.data}
-                                            req={true}
+                                            req={props.req}
                                             style={{marginTop: 'calc(25px + 1.5rem)'}}>
                                 <Title name="Contacto Administrativo"/>
                             </FieldComponent>
 
                             {/* CONTACTO COMERCIAL*/}
                             <FieldComponent name='Com'
+                                            inputError={props.validation.inputError}
+                                            errorMessage={props.validation.errorMessage}
                                             onChange={props.onChangeForm}
                                             values={props.data}
-                                            req={props.checked}>
+                                            req={props.req}>
                                 <Title name="Contacto Comercial"/>
                                 <div className="custom-control custom-checkbox mb-4">
                                     <input type="checkbox"
@@ -138,6 +155,4 @@ const Form = (props) => {
         </div>
     )
 }
-
-
 export default Form;

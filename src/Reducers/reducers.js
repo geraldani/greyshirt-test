@@ -3,8 +3,9 @@ import {inicialState} from "./store";
 
 function newArray(dataArray, i, eleEdited) {
     let newArray = [];
-    dataArray.map((elem, index,) => {
+    dataArray.map((elem, index,arr) => {
         index === i ? newArray[index] = eleEdited : newArray[index] = elem
+        return arr
     })
     return newArray;
 }

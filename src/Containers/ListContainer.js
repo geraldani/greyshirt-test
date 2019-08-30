@@ -3,6 +3,7 @@ import List from "../Components/List";
 import Modal from "../Components/utilidades/Modal";
 import {connect} from "react-redux";
 import {deleteDelivery} from "../Reducers/actions";
+import Buttom from "../Components/utilidades/Buttom";
 
 class ListContainer extends Component {
     constructor(props) {
@@ -11,19 +12,21 @@ class ListContainer extends Component {
             index: -1,
             showModal: false,
             columns: {
-                pageSize: 500,
-                cols: 4,
-                colContent: [
-                    {title: 'Nombre', order: true},
-                    {title: 'Dirección', order: true},
-                    {title: 'Teléfono', order: false},
-                    {title: '', order: false, content: 'acciones'},
+                pageSize: 5,
+                name:'Listado de deliveries',
+                titleChildren: <Buttom class='btn-primary' onclick={this.onclick} name={'Crear nuevo delivery'}/>,
+                showButtons:true,
+                thContent: [
+                    {title: 'Nombre', order: true, content: elem => elem.name},
+                    {title: 'Dirección', order: true, content: elem => elem.direction},
+                    {title: 'Teléfono', order: false, content: elem => elem.number},
+                    // {title: 'Descripcion', order: false, content: elem => elem.description},
                 ]
             }
-        }
+        };
         this.indice = -1;
     }
-    onclick = e => {
+    onclick = () => {
         this.props.history.push({pathname: '/add'})
     };
     onDelete = () => {
@@ -43,7 +46,6 @@ class ListContainer extends Component {
     onModify = id => {
         this.indice = this.findIndex(id);
         this.props.history.push({pathname: '/add', state: {index: this.indice}})
-        // this.props.dispatch(updateDelivery(this.props.allData[this.indice]))
     };
     showModal = id => {
         this.setState({
@@ -63,7 +65,7 @@ class ListContainer extends Component {
                       col={this.state.columns}
                       onDelete={this.showModal}
                       onModify={this.onModify}
-                      onclick={this.onclick}/>
+                />
                 {
                     this.state.showModal &&
                     <Modal
@@ -77,7 +79,7 @@ class ListContainer extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        allData: state.data
+        allData: state.data,
     }
 }
 export default connect(mapStateToProps)(ListContainer);

@@ -10,7 +10,7 @@ const Textarea = (props) => (
             req={props.req} />
         <textarea
             id={props.name + 'Id'}
-            className="form-control"
+            className={`form-control mb-4 ${props.clas}`}
             onChange={props.onChange}
             name={props.name}
             aria-describedby={props.name + 'Set'}

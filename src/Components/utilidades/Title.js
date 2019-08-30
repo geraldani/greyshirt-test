@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 
 const Title = (props) => (
     <div className='d-flex align-items-center justify-content-between border-bottom mb-4'>

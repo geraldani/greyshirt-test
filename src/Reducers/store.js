@@ -3,28 +3,11 @@ import reducers from "./reducers";
 import uuid from "react-uuid";
 
 export const inicialState = {
-    formData: {
-        name: '',
-        description: '',
-        number: '',
-        speciality: '',
-        direction: '',
-        fromHour: '',
-        toHour: '',
-        nameAdm: '',
-        surnameAdm: '',
-        numberAdm: '',
-        emailAdm: '',
-        nameCom: '',
-        surnameCom: '',
-        numberCom: '',
-        emailCom: '',
-    },
     data: [
         {
             id: uuid(),
-            name: 'Bar BQ',
-            description: '',
+            name: 'Bar BBQ',
+            description: 'un lugar para hacer barbeque',
             number: '+5491173646494',
             speciality: '',
             direction: 'av. vidal 2828, belgrano',
@@ -42,6 +25,7 @@ export const inicialState = {
         {
             id: uuid(),
             name: 'El galpon de jose',
+            description:'un galpon bonito',
             number: '+546343435654',
             speciality: '',
             direction: 'calle 4511 nro 28, Palermo',
@@ -59,11 +43,12 @@ export const inicialState = {
         {
             id: uuid(),
             name: 'Fanaticos de Asado',
+            description:'somos fanaticos de la carne',
             number: '+9654751251',
             speciality: '',
             direction: 'calle 74 nro 874, La Pampa',
-            fromHour: '',
-            toHour: '',
+            fromHour: '14:07',
+            toHour: '00:01',
             nameAdm: '',
             surnameAdm: '',
             numberAdm: '',
@@ -72,7 +57,7 @@ export const inicialState = {
             surnameCom: '',
             numberCom: '',
             emailCom: '',
-        },
+        }
     ]
 };
 //Redux store

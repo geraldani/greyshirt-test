@@ -16,7 +16,7 @@ const Input = (props) => {
             }
             <input
                 type={props.type}
-                className="form-control mb-4"
+                className={`form-control mb-4 ${props.clas}`}
                 id={`${props.name}Id`}
                 value={props.value}
                 name={props.name}

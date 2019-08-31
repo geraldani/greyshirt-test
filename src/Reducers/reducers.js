@@ -9,6 +9,7 @@ function newArray(dataArray, i, eleEdited) {
     })
     return newArray;
 }
+
 const reducers = (state = inicialState, action) => {
     switch (action.type) {
         case TYPE_ACTIONS.SAVE_DATA:
@@ -21,7 +22,7 @@ const reducers = (state = inicialState, action) => {
                     return (index !== action.index)
                 }),
             });
-        case TYPE_ACTIONS.MODIFY_DATA:
+        case TYPE_ACTIONS.EDIT_DATA:
             return Object.assign({}, state, {
                 data: newArray(state.data, action.index, action.data),
             });

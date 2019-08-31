@@ -9,8 +9,7 @@ class FormContainer extends Component {
         super(props);
         this.isError = false;
         this.state = {
-            formData:
-                !this.props.modify ?
+            formData: !this.props.modify ?
                     {
                         id: '',
                         name: '',
@@ -29,9 +28,12 @@ class FormContainer extends Component {
                         numberCom: '',
                         emailCom: '',
                     } : this.props.dataForm[this.props.modify.index],
-            length: {
+            length: !this.props.modify? {
                 charactersEsp: 0,
                 charactersDesc: 0,
+            } : {
+                charactersEsp:this.props.dataForm[this.props.modify.index].speciality.length,
+                charactersDesc:this.props.dataForm[this.props.modify.index].description.length
             },
             checked: false,
             validation: {
@@ -57,6 +59,7 @@ class FormContainer extends Component {
             emailCom: false,
         }
     }
+
     handleChange = e => {
         this.setState({
             formData: {
@@ -68,8 +71,9 @@ class FormContainer extends Component {
                 charactersEsp: e.target.name === 'speciality' ? e.target.textLength : this.state.length.charactersEsp
             }
         })
-    };
-    handleCheck = e => {
+    }
+
+    handleCheck = () => {
         this.setState({
             checked: !this.state.checked,
         })
@@ -81,9 +85,10 @@ class FormContainer extends Component {
             emailCom: !this.state.checked
         }
     };
-    onCancel = e => {
+    onCancel = () => {
         this.props.history.push({pathname: '/'})
     };
+
     onAccept = e => {
         e.preventDefault();
         this.isError = false;
@@ -93,14 +98,14 @@ class FormContainer extends Component {
                 this.isError = true;
                 array.push(elem)
             }
-            this.setState({
-                validation: {
-                    ...this.state.validation,
-                    inputError: array
-                }
-            })
         }
-        if(!this.isError) {
+        this.setState({
+            validation: {
+                ...this.state.validation,
+                inputError: array
+            }
+        })
+        if (!this.isError) {
             if (this.props.modify)
                 this.props.dispatch(updateDelivery(this.state.formData, this.props.modify.index));
             else
@@ -108,6 +113,7 @@ class FormContainer extends Component {
             this.props.history.push('/')
         }
     };
+
     render() {
         return (
             <Form

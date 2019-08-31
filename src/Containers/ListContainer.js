@@ -12,20 +12,21 @@ class ListContainer extends Component {
             index: -1,
             showModal: false,
             columns: {
-                pageSize: 5,
-                name:'Listado de deliveries',
+                pageSize: 4,
+                name: 'Listado de deliveries',
                 titleChildren: <Buttom class='btn-primary' onclick={this.onclick} name={'Crear nuevo delivery'}/>,
-                showButtons:true,
+                showButtons: true,
                 thContent: [
-                    {title: 'Nombre', order: true, content: elem => elem.name},
-                    {title: 'Dirección', order: true, content: elem => elem.direction},
-                    {title: 'Teléfono', order: false, content: elem => elem.number},
-                    // {title: 'Descripcion', order: false, content: elem => elem.description},
+                    {title: 'Nombre', order: true, field: 'name',width:100},
+                    {title: 'Dirección', order: true, field: 'direction',width:150},
+                    {title: 'Teléfono', order: false, field: 'number',width:140},
+                    // {title: 'Descripcion', order: false, field: 'description',width:120},
                 ]
             }
         };
         this.indice = -1;
     }
+
     onclick = () => {
         this.props.history.push({pathname: '/add'})
     };
@@ -61,7 +62,7 @@ class ListContainer extends Component {
     render() {
         return (
             <Fragment>
-                <List data={this.props.allData}
+                    <List
                       col={this.state.columns}
                       onDelete={this.showModal}
                       onModify={this.onModify}

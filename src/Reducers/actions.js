@@ -22,7 +22,7 @@ export function deleteDelivery(i) {
 export function updateDelivery(obj,i) {
     if (obj) {
         return {
-            type:TYPE_ACTIONS.MODIFY_DATA,
+            type:TYPE_ACTIONS.EDIT_DATA,
             data:obj,
             index:i
         }

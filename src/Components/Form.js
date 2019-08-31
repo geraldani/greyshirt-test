@@ -145,7 +145,7 @@ const Form = (props) => {
                             Dato oblidatorio
                         </small>
 
-                        <div className='d-flex justify-content-end'>
+                        <div className='d-flex justify-content-end mb-6'>
                             <Buttom onclick={props.oncancel} class='btn-secondary mr-2' name='Cancelar'/>
                             <Buttom type='submit' onclick={props.onacept} class='btn-primary' name='Guardar'/>
                         </div>
